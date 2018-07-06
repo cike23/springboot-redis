@@ -1,10 +1,9 @@
 package com.attech.redis.config;
 
-
-
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -53,11 +52,9 @@ public class RedisConfig extends CachingConfigurerSupport {
 //    }
     //缓存管理器
     @Bean
-    public CacheManager cacheManager(@SuppressWarnings("rawtypes") RedisTemplate redisTemplate) {
-        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
-        //设置缓存过期时间
-        cacheManager.setDefaultExpiration(10000);
-        return cacheManager;
+    public CacheManager cacheManager(
+            @SuppressWarnings("rawtypes") RedisTemplate redisTemplate) {
+        return new RedisCacheManager(redisTemplate);
     }
 
     @Bean
